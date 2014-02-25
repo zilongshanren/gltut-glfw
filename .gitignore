@@ -14,7 +14,8 @@
 # files that we want to exclude
 #
 #########################
-
+gltut-glfw.xcodeproj/project.xcworkspace
+gltut-glfw.xcodeproj/xcuserdata
 #####
 # OS X temporary files that should never be committed
 #
