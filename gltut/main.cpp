@@ -78,7 +78,7 @@ int main(int argc, const char * argv[])
     int windowHeight = 0;
     
     glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
-    onFramebufferResize(window, windowWidth, windowHeight);
+//    onFramebufferResize(window, windowWidth, windowHeight);
     glfwSetFramebufferSizeCallback(window, &onFramebufferResize);
     
     glfwSetKeyCallback(window, key_callback);

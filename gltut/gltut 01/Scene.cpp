@@ -37,12 +37,14 @@ const std::string fragmentShaderString(
                                        "   outputColor = vec4( 1.0f, 1.0f, 1.0f, 1.0f ); "
                                        "} "
                                        );
-
+//coordinates within a range [-1,1] of all axis will be displayed in the screen
+//If you can't understand this, please refer to these videos
+//https://www.youtube.com/watch?v=-tonZsbHty8&index=26&list=PLRwVmtr-pp06qT6ckboaOhnm9FxmzHpbY
 const float vertexPositions[] =
 {
-	0.75f, 0.75f, 0.0f, 1.0f,
-	0.75f, -0.75f, 0.0f, 1.0f,
-	-0.75f, -0.75f, 0.0f, 1.0f
+	-1.5f, -1.0f, 0.0f, 1.0f,
+	0.0f, 2.0f, 0.0f, 1.0f,
+	1.0f, -1.0f,  0.0f, 1.0f
 };
 
 Scene::Scene()
