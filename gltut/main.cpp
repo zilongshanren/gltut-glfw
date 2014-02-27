@@ -40,7 +40,7 @@ Scene scene = Scene();
 void onFramebufferResize(GLFWwindow* window, int width, int height)
 {
     scene.reshape(width, height);
-    glfwSwapBuffers(window);
+//    glfwSwapBuffers(window);
 
 }
 
@@ -78,7 +78,7 @@ int main(int argc, const char * argv[])
     int windowHeight = 0;
     
     glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
-//    onFramebufferResize(window, windowWidth, windowHeight);
+    onFramebufferResize(window, windowWidth, windowHeight);
     glfwSetFramebufferSizeCallback(window, &onFramebufferResize);
     
     glfwSetKeyCallback(window, key_callback);

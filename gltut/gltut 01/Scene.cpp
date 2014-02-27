@@ -84,8 +84,8 @@ void Scene::reshape(int width, int height)
     int finalWidth = width;
     int finalHeight = height;
     
-    int derivedHeight = width * (1/aspectRatio);
-    int derivedWidth = height * aspectRatio;
+    int derivedHeight = height * (1/aspectRatio);
+    int derivedWidth = width * aspectRatio;
     
     if (derivedHeight <= height)
     {
@@ -101,7 +101,7 @@ void Scene::reshape(int width, int height)
                finalWidth,
                finalHeight);
     
-    this->draw();
+//    this->draw();
 }
 
 void Scene::draw()
