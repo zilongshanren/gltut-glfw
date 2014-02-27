@@ -158,7 +158,7 @@ void Scene::init()
     
 	perspectiveMatrixUniform = glGetUniformLocation(_shaderProgram, "perspectiveMatrix");
     
-	float fFrustumScale = 1.0f; float fzNear = 0.5f; float fzFar = 3.0f;
+	float fFrustumScale = 1.0f; float fzNear = 1.0f; float fzFar = 22.0f;
     
 	float theMatrix[16];
 	memset(theMatrix, 0, sizeof(float) * 16);
@@ -171,6 +171,31 @@ void Scene::init()
     
 	glUniformMatrix4fv(perspectiveMatrixUniform, 1, GL_FALSE, theMatrix);
     
+}
+
+void Scene::reshape(int width, int height)
+{
+    const float aspectRatio = 1.0f;
+    
+    int finalWidth = width;
+    int finalHeight = height;
+    
+    int derivedHeight = height * (1/aspectRatio);
+    int derivedWidth = width * aspectRatio;
+    
+    if (derivedHeight <= height)
+    {
+        finalHeight = derivedHeight;
+    }
+    else if (derivedWidth <= width)
+    {
+        finalWidth = derivedWidth;
+    }
+    
+    glViewport( (width-finalWidth)  / 2,
+               (height-finalHeight) / 2,
+               finalWidth,
+               finalHeight);
 }
 
 Scene::~Scene()

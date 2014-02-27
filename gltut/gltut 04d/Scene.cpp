@@ -172,6 +172,9 @@ void Scene::init()
     
 	glUniformMatrix4fv(perspectiveMatrixUniform, 1, GL_FALSE, perspectiveMatrix);
     
+    
+    
+    
 }
 
 Scene::~Scene()
@@ -187,9 +190,8 @@ void Scene::reshape(int width, int height)
     perspectiveMatrix[5] = frustumScale;
     
     glUniformMatrix4fv(perspectiveMatrixUniform, 1, GL_FALSE, perspectiveMatrix);
-
-    this->draw();
 }
+
 
 void Scene::draw()
 {

@@ -163,6 +163,30 @@ Scene::~Scene()
     printOpenGLError();
 }
 
+void Scene::reshape(int width, int height)
+{
+    const float aspectRatio = 1.0f;
+    
+    int finalWidth = width;
+    int finalHeight = height;
+    
+    int derivedHeight = height * (1/aspectRatio);
+    int derivedWidth = width * aspectRatio;
+    
+    if (derivedHeight <= height)
+    {
+        finalHeight = derivedHeight;
+    }
+    else if (derivedWidth <= width)
+    {
+        finalWidth = derivedWidth;
+    }
+    
+    glViewport( (width-finalWidth)  / 2,
+               (height-finalHeight) / 2,
+               finalWidth,
+               finalHeight);
+}
 
 
 void Scene::draw()
