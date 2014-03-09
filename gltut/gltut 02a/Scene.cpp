@@ -18,9 +18,9 @@
 
 const float vertexPositions[] =
 {
-	0.75f, 0.75f, 0.0f, 1.0f,
-	0.75f, -0.75f, 0.0f, 1.0f,
-	-0.75f, -0.75f, 0.0f, 1.0f
+	0.75f, 0.75f, 1.0f, 1.0f,
+	0.75f, -0.75f, 1.0f, 1.0f,
+	-0.75f, -0.75f, 1.0f, 1.0f
 };
 
 Scene::Scene()
@@ -70,6 +70,8 @@ void Scene::init()
     glGenVertexArrays(1, &_vertexArrayObject);
 	glBindVertexArray(_vertexArrayObject);
     printOpenGLError();
+    
+    //glEnable(GL_DEPTH_TEST);
 }
 
 Scene::~Scene()
@@ -84,7 +86,7 @@ Scene::~Scene()
 void Scene::draw()
 {
     glClearColor(0.2f, 0.0f, 0.0f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferObject);
 	glEnableVertexAttribArray(0);

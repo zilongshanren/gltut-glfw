@@ -228,7 +228,7 @@ void Scene::init()
     
 	perspectiveMatrixUniform = glGetUniformLocation(_shaderProgram, "perspectiveMatrix");
     
-	float zNear = 0.5f; float zFar = 3.0f;
+	float zNear = 0.0f; float zFar = 10.0f;
     
 	memset(perspectiveMatrix, 0, sizeof(float) * 16);
     
@@ -238,7 +238,9 @@ void Scene::init()
 	perspectiveMatrix[14] = (2 * zFar * zNear) / (zNear - zFar);
 	perspectiveMatrix[11] = -1.0f;
     
+    glUseProgram(_shaderProgram);
 	glUniformMatrix4fv(perspectiveMatrixUniform, 1, GL_FALSE, perspectiveMatrix);
+    glUseProgram(0);
     printOpenGLError();
 
 }
@@ -255,9 +257,10 @@ void Scene::reshape(int width, int height)
     perspectiveMatrix[0] = frustumScale / (width / (float)height);
     perspectiveMatrix[5] = frustumScale;
     
+    glUseProgram(_shaderProgram);
     glUniformMatrix4fv(perspectiveMatrixUniform, 1, GL_FALSE, perspectiveMatrix);
 
-    this->draw();
+    glViewport(0, 0, width, height);
 }
 
 void Scene::draw()
@@ -267,17 +270,19 @@ void Scene::draw()
  
 	glBindVertexArray(vertexArrayObject1);
     printOpenGLError();
-	glUniform3f(offsetUniform, 0.0f, 0.0f, 0.0f);
+    glUseProgram(_shaderProgram);
+	glUniform3f(offsetUniform, 0.0f, 0.0f, 1.0f);
     printOpenGLError();
  	glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
     printOpenGLError();
 
 	glBindVertexArray(vertexArrayObject2);
     printOpenGLError();
-	glUniform3f(offsetUniform, 0.0f, 0.0f, -1.0f);
+	glUniform3f(offsetUniform, 0.0f, 0.0f, 0.0f);
     printOpenGLError();
 	glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
     printOpenGLError();
+    glUseProgram(0);
 }
 
 void Scene::keyStateChanged(int key, int action)

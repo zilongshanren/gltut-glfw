@@ -125,7 +125,7 @@ GLuint offsetUniform;
 GLuint perspectiveMatrixUniform;
 
 float perspectiveMatrix[16];
-const float frustumScale = 1.0f;
+const float frustumScale = 2.0f;
 
 Scene::Scene()
 {
@@ -160,7 +160,7 @@ void Scene::init()
     
 	perspectiveMatrixUniform = glGetUniformLocation(_shaderProgram, "perspectiveMatrix");
     
-	float zNear = 0.5f; float zFar = 3.0f;
+	float zNear = 0.5f; float zFar = 4.0f;
     
 	memset(perspectiveMatrix, 0, sizeof(float) * 16);
     
@@ -189,7 +189,11 @@ void Scene::reshape(int width, int height)
     perspectiveMatrix[0] = frustumScale / (width / (float)height);
     perspectiveMatrix[5] = frustumScale;
     
+    glUseProgram(_shaderProgram);
     glUniformMatrix4fv(perspectiveMatrixUniform, 1, GL_FALSE, perspectiveMatrix);
+    glUseProgram(0);
+    
+    glViewport(0, 0, width, height);
 }
 
 
@@ -198,7 +202,8 @@ void Scene::draw()
     glClearColor(0.2f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
-	glUniform2f(offsetUniform, 0.5f, 0.5f);
+    glUseProgram(_shaderProgram);
+	glUniform2f(offsetUniform, 0.0f, 0.3f);
 
 	size_t colorData = sizeof(vertexData) / 2;
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferObject);

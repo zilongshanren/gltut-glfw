@@ -267,4 +267,18 @@ void Scene::draw()
 
 void Scene::keyStateChanged(int key, int action)
 {
+    static bool bDepthClampingActive = false;
+    switch (key)
+    {
+        case 27:
+            break;
+        case 32:
+            if(bDepthClampingActive)
+                glDisable(GL_DEPTH_CLAMP);
+            else
+                glEnable(GL_DEPTH_CLAMP);
+            
+            bDepthClampingActive = !bDepthClampingActive;
+            break;
+    }
 }

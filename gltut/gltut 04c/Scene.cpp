@@ -169,6 +169,7 @@ void Scene::init()
 	theMatrix[14] = (2 * fzFar * fzNear) / (fzNear - fzFar);
 	theMatrix[11] = -1.0f;
     
+    glUseProgram(_shaderProgram);
 	glUniformMatrix4fv(perspectiveMatrixUniform, 1, GL_FALSE, theMatrix);
     
 }
@@ -212,6 +213,7 @@ void Scene::draw()
     glClearColor(0.2f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
+    glUseProgram(_shaderProgram);
 	glUniform2f(offsetUniform, 0.5f, 0.5f);
 
 	size_t colorData = sizeof(vertexData) / 2;
